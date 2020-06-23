@@ -16,8 +16,8 @@ import java.text.SimpleDateFormat;
 public class Receipt extends JFrame implements ActionListener {
 
     private JLabel titleLabel, timeLabel, imageLabel;
-    private JTextArea indicateTextArea, priceTextArea;
-    private JPanel indicatePanel,pricePanel;
+    private JTextArea indicateTextArea, priceTextArea, quantityTextArea, amountTextArea;
+    private JPanel indicatePanel,pricePanel, quantityPanel, amountPanel;
     private JButton menuButton, printReceiptButton;
     private ImageIcon backgroundImage;
     private String time;
@@ -65,11 +65,11 @@ public class Receipt extends JFrame implements ActionListener {
 //        indicateTextArea
         indicateTextArea = new JTextArea(30,40);
         indicateTextArea.setText("Description\t         Quantity    Price    Amount"+
-                                 "\n-----------------------------------------------------------------------------"+
+                                 "\n--------------------------------------------------------------------------------"+
                                  "\nNext Day Delivery \nSame Day Delivery \nPrepaid Box And Envelope \nPos Express"+
-                                 "\n-----------------------------------------------------------------------------"+
-                                 "\n\t\t\tTotal:" +
-                                 "\n-----------------------------------------------------------------------------"+
+                                 "\n--------------------------------------------------------------------------------"+
+                                 "\n\t\t                       Total:" +
+                                 "\n--------------------------------------------------------------------------------"+
                                  "\n\n*****************Thank You. Please come again*****************");
         indicateTextArea.setFont(new Font("Book Antiqua",Font.PLAIN,18));
         indicateTextArea.setLineWrap(true);
@@ -88,25 +88,26 @@ public class Receipt extends JFrame implements ActionListener {
                 "\n0          0.00         0.00"+
                 "\n0          0.00         0.00 \n\n\t 0.00"*/
 
+//        quantityTextArea
+        quantityTextArea = new JTextArea(10,20);
+        quantityTextArea.setText((arrayList1.get(0)) + "\n" + (arrayList2.get(0)) + "\n" + (arrayList3.get(0)) + "\n" + (arrayList4.get(0)));
+
+        quantityTextArea.setFont(new Font("Book Antiqua",Font.PLAIN,18));
+        quantityTextArea.setLineWrap(true);
+        quantityTextArea.setEditable(false);
+        quantityTextArea.setWrapStyleWord(true);
+        quantityTextArea.setOpaque(false);
+
+        quantityPanel = new JPanel();
+        quantityPanel.add(quantityTextArea);
+        quantityPanel.setBounds(210,197,700,300);
+        quantityPanel.setOpaque(false);
+        imageLabel.add(quantityPanel);
+
 //        priceTextArea
         priceTextArea = new JTextArea(10,20);
-        priceTextArea.setText(String.format("%d",Integer.parseInt(arrayList1.get(0))) +
-                              String.format("%13.2f",Double.parseDouble(arrayList1.get(1))) +
-                              String.format("%12.2f",Double.parseDouble(arrayList1.get(2))) +
+        priceTextArea.setText((arrayList1.get(1)) + "\n" + (arrayList2.get(1)) + "\n" + (arrayList3.get(1)) +"\n" + (arrayList4.get(1)));
 
-                              String.format("\n%d",Integer.parseInt(arrayList2.get(0))) +
-                              String.format("%13.2f",Double.parseDouble(arrayList2.get(1))) +
-                              String.format("%12.2f",Double.parseDouble(arrayList2.get(2))) +
-
-                              String.format("\n%d",Integer.parseInt(arrayList3.get(0))) +
-                              String.format("%13.2f",Double.parseDouble(arrayList3.get(1))) +
-                              String.format("%12.2f",Double.parseDouble(arrayList3.get(2))) +
-
-                              String.format("\n%d",Integer.parseInt(arrayList4.get(0))) +
-                              String.format("%13.2f",Double.parseDouble(arrayList4.get(1))) +
-                              String.format("%12.2f",Double.parseDouble(arrayList4.get(2))) +
-                              " \n\n\t" + (Double.parseDouble(arrayList1.get(2)) + Double.parseDouble(arrayList2.get(2)) +
-                               Double.parseDouble(arrayList3.get(2)) + Double.parseDouble(arrayList4.get(2)) ));
         priceTextArea.setFont(new Font("Book Antiqua",Font.PLAIN,18));
         priceTextArea.setLineWrap(true);
         priceTextArea.setEditable(false);
@@ -115,9 +116,27 @@ public class Receipt extends JFrame implements ActionListener {
 
         pricePanel = new JPanel();
         pricePanel.add(priceTextArea);
-        pricePanel.setBounds(220,197,700,300);
+        pricePanel.setBounds(270,197,700,300);
         pricePanel.setOpaque(false);
         imageLabel.add(pricePanel);
+
+//        amountTextArea
+        amountTextArea = new JTextArea(10,20);
+        amountTextArea.setText((arrayList1.get(2)) + "\n" + (arrayList2.get(2)) + "\n" + (arrayList3.get(2)) + "\n" + (arrayList4.get(2)) +
+                                "\n\n" + (Double.parseDouble(arrayList1.get(2)) + Double.parseDouble(arrayList2.get(2)) +
+                Double.parseDouble(arrayList3.get(2)) + Double.parseDouble(arrayList4.get(2)) ));
+
+        amountTextArea.setFont(new Font("Book Antiqua",Font.PLAIN,18));
+        amountTextArea.setLineWrap(true);
+        amountTextArea.setEditable(false);
+        amountTextArea.setWrapStyleWord(true);
+        amountTextArea.setOpaque(false);
+
+        amountPanel = new JPanel();
+        amountPanel.add(amountTextArea);
+        amountPanel.setBounds(330,197,700,300);
+        amountPanel.setOpaque(false);
+        imageLabel.add(amountPanel);
 
 //        menu
         menuButton = new JButton("Menu");
